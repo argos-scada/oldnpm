@@ -8,8 +8,9 @@ COPY ./scadalts-ui/package.json ./scadalts-ui/node_modules /scadalts-ui
 RUN --mount=type=cache,target=/scadalts-ui/node_modules	\
 	npm install
 COPY ./scadalts-ui /scadalts-ui
+COPY ./scadalts-ui/node_modules /node_modules
 RUN --mount=type=cache,target=/scadalts-ui/node_modules	\
-	npm run build
+	mv /node_modules/* node_modules && npm run build
 
 FROM scratch AS npm_package
 COPY --from=npm_build /scadalts-ui/dist /dist
