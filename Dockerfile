@@ -5,10 +5,10 @@ COPY ./scadalts-ui /scadalts-ui
 FROM node:14.21.3-bullseye AS npm_build
 WORKDIR /scadalts-ui
 COPY ./scadalts-ui/package.json ./scadalts-ui/node_modules /scadalts-ui
-RUN --mount=type=cache,target=/src/scadalts-ui/node_modules	\
+RUN --mount=type=cache,target=/scadalts-ui/node_modules	\
 	npm install
 COPY ./scadalts-ui /scadalts-ui
-RUN --mount=type=cache,target=/src/scadalts-ui/node_modules	\
+RUN --mount=type=cache,target=/scadalts-ui/node_modules	\
 	npm run build
 
 FROM scratch AS npm_package
