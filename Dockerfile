@@ -7,7 +7,7 @@ WORKDIR /scadalts-ui
 COPY ./scadalts-ui/package.json ./scadalts-ui/node_modules /scadalts-ui
 RUN npm install
 COPY ./scadalts-ui /scadalts-ui
-RUN mv /node_modules/* node_modules && npm run build
+RUN npm run build
 
 FROM scratch AS npm_package
 COPY --from=npm_build /scadalts-ui/dist /dist
